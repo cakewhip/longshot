@@ -5,6 +5,7 @@ import com.kqp.longshot.LongshotConfig;
 import com.kqp.longshot.item.LongshotItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ItemGroup;
 
 public class SlingEnchantment extends TargetedEnchantment {
 
@@ -34,5 +35,10 @@ public class SlingEnchantment extends TargetedEnchantment {
     @Override
     public int getMaxLevel() {
         return LongshotConfig.get().slingEnchantmentMaxLevel;
+    }
+
+    @Override
+    public ItemGroup getItemGroup() {
+        return ItemGroup.TOOLS;
     }
 }
