@@ -1,7 +1,7 @@
 package com.kqp.longshot.enchantment;
 
 import com.kqp.cakelib.enchantment.TargetedEnchantment;
-import com.kqp.strangery.item.LongshotItem;
+import com.kqp.longshot.item.LongshotItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 
