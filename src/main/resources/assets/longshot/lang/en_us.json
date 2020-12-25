@@ -1,6 +1,6 @@
 {
-    "item.strangery.longshot": "Longshot",
+    "item.longshot.longshot": "Longshot",
 
-    "enchantment.strangery.sling": "Sling",
-    "enchantment.strangery.air_loading": "Air Loading"
+    "enchantment.longshot.sling": "Sling",
+    "enchantment.longshot.air_loading": "Air Loading"
 }
