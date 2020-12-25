@@ -168,8 +168,8 @@ public class LongshotItem extends Item {
         float speed =
             (pullProgress * 3.0F) *
             (
-                1.0F +
-                1.15F *
+                LongshotConfig.get().longshotDurability +
+                LongshotConfig.get().slingMaxLevel *
                 // Avoid dividing by 0
                 (
                     slingLevel /

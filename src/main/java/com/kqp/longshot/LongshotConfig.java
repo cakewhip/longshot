@@ -12,6 +12,12 @@ public class LongshotConfig implements ConfigData {
     @Comment("Requires a restart.")
     public int longshotDurability = 1024;
 
+    @Comment(
+        "How far launching is without Sling. Full calculation:\n" +
+        "pullDuration * (longshotBaseSpeed + (slingSpeedMultiplier * (slingLevel / slingMaxLevel)))"
+    )
+    public double longshotBaseSpeed = 1.0D;
+
     public int longshotLoadTime = 10;
 
     @Comment(
@@ -24,14 +30,20 @@ public class LongshotConfig implements ConfigData {
     @Comment("Requires a restart.")
     public boolean enableSlingEnchantment = true;
 
-    public int slingEnchantmentMaxLevel = 5;
+    @Comment(
+        "The launch bonus from Sling is calculated as:\n" +
+        "pullDuration * (longshotBaseSpeed + (slingSpeedMultiplier * (slingLevel / slingMaxLevel)))"
+    )
+    public double slingSpeedMultiplier = 1.15D;
 
-    public boolean slingEnchantmentIsTreasure = false;
+    public int slingMaxLevel = 5;
+
+    public boolean slingIsTreasure = false;
 
     @Comment("Requires a restart.")
     public boolean enableAirLoadingEnchantment = true;
 
-    public boolean airLoadingEnchantmentIsTreasure = true;
+    public boolean airLoadingIsTreasure = true;
 
     public static void init() {
         AutoConfig.register(LongshotConfig.class, JanksonConfigSerializer::new);
