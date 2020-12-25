@@ -14,11 +14,7 @@ public class Longshot implements ModInitializer {
 
     public static final String MOD_ID = "longshot";
 
-    public static Item LONGSHOT = Registry.register(
-        Registry.ITEM,
-        id("longshot"),
-        new LongshotItem()
-    );
+    public static Item LONGSHOT;
 
     public static Optional<Enchantment> SLING = Optional.empty();
 
@@ -49,6 +45,13 @@ public class Longshot implements ModInitializer {
                     )
                 );
         }
+
+        LONGSHOT =
+            Registry.register(
+                Registry.ITEM,
+                id("longshot"),
+                new LongshotItem()
+            );
     }
 
     private static Identifier id(String path) {
