@@ -1,6 +1,7 @@
 package com.kqp.longshot.enchantment;
 
 import com.kqp.cakelib.enchantment.TargetedEnchantment;
+import com.kqp.longshot.LongshotConfig;
 import com.kqp.longshot.item.LongshotItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
@@ -27,7 +28,7 @@ public class AirLoadingEnchantment extends TargetedEnchantment {
 
     @Override
     public boolean isTreasure() {
-        return true;
+        return LongshotConfig.get().airLoadingEnchantmentIsTreasure;
     }
 
     @Override

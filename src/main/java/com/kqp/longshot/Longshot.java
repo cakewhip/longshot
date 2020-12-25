@@ -3,6 +3,7 @@ package com.kqp.longshot;
 import com.kqp.longshot.enchantment.AirLoadingEnchantment;
 import com.kqp.longshot.enchantment.SlingEnchantment;
 import com.kqp.longshot.item.LongshotItem;
+import java.util.Optional;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
@@ -19,20 +20,36 @@ public class Longshot implements ModInitializer {
         new LongshotItem()
     );
 
-    public static Enchantment SLING = Registry.register(
-        Registry.ENCHANTMENT,
-        id("sling"),
-        new SlingEnchantment()
-    );
+    public static Optional<Enchantment> SLING = Optional.empty();
 
-    public static Enchantment AIR_LOADING = Registry.register(
-        Registry.ENCHANTMENT,
-        id("air_loading"),
-        new AirLoadingEnchantment()
-    );
+    public static Optional<Enchantment> AIR_LOADING = Optional.empty();
 
     @Override
-    public void onInitialize() {}
+    public void onInitialize() {
+        LongshotConfig.init();
+
+        if (LongshotConfig.get().enableSlingEnchantment) {
+            SLING =
+                Optional.of(
+                    Registry.register(
+                        Registry.ENCHANTMENT,
+                        id("sling"),
+                        new SlingEnchantment()
+                    )
+                );
+        }
+
+        if (LongshotConfig.get().enableAirLoadingEnchantment) {
+            AIR_LOADING =
+                Optional.of(
+                    Registry.register(
+                        Registry.ENCHANTMENT,
+                        id("air_loading"),
+                        new AirLoadingEnchantment()
+                    )
+                );
+        }
+    }
 
     private static Identifier id(String path) {
         return new Identifier(MOD_ID, path);

@@ -1,6 +1,7 @@
 package com.kqp.longshot.enchantment;
 
 import com.kqp.cakelib.enchantment.TargetedEnchantment;
+import com.kqp.longshot.LongshotConfig;
 import com.kqp.longshot.item.LongshotItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
@@ -26,7 +27,12 @@ public class SlingEnchantment extends TargetedEnchantment {
     }
 
     @Override
+    public boolean isTreasure() {
+        return LongshotConfig.get().slingEnchantmentIsTreasure;
+    }
+
+    @Override
     public int getMaxLevel() {
-        return 5;
+        return LongshotConfig.get().slingEnchantmentMaxLevel;
     }
 }

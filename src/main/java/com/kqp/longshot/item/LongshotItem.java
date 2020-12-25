@@ -1,7 +1,8 @@
 package com.kqp.longshot.item;
 
+import com.kqp.cakelib.util.EnchantmentUtil;
 import com.kqp.longshot.Longshot;
-import net.minecraft.enchantment.EnchantmentHelper;
+import com.kqp.longshot.LongshotConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -18,11 +19,13 @@ import net.minecraft.world.World;
 
 public class LongshotItem extends Item {
 
-    private static final float MAX_PITCH = 25;
-    private static final int MAX_LOAD_TIME = 15;
-
     public LongshotItem() {
-        super(new Settings().group(ItemGroup.TOOLS).maxCount(1).maxDamage(256));
+        super(
+            new Settings()
+                .group(ItemGroup.TOOLS)
+                .maxCount(1)
+                .maxDamage(LongshotConfig.get().longshotDurability)
+        );
     }
 
     @Override
@@ -37,7 +40,7 @@ public class LongshotItem extends Item {
 
             int i = this.getMaxUseTime(stack) - remainingUseTicks;
 
-            if (i == MAX_LOAD_TIME) {
+            if (i == LongshotConfig.get().longshotLoadTime) {
                 world.playSound(
                     null,
                     player.getX(),
@@ -62,7 +65,7 @@ public class LongshotItem extends Item {
         if (user instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) user;
             boolean hasAirLoading =
-                EnchantmentHelper.getLevel(Longshot.AIR_LOADING, stack) > 0;
+                EnchantmentUtil.getLevel(Longshot.AIR_LOADING, stack) > 0;
 
             if (player.isOnGround() || hasAirLoading) {
                 int i = this.getMaxUseTime(stack) - remainingUseTicks;
@@ -75,15 +78,18 @@ public class LongshotItem extends Item {
                     double maxVelY = calcSlingVelocity(
                         pullProgress,
                         yaw,
-                        Math.max(player.pitch, -MAX_PITCH),
-                        EnchantmentHelper.getLevel(Longshot.SLING, stack)
+                        (float) Math.max(
+                            player.pitch,
+                            -LongshotConfig.get().longshotMaxPitchAngle
+                        ),
+                        EnchantmentUtil.getLevel(Longshot.SLING, stack)
                     )
                         .y;
                     Vec3d normalVel = calcSlingVelocity(
                         pullProgress,
                         yaw,
                         pitch,
-                        EnchantmentHelper.getLevel(Longshot.SLING, stack)
+                        EnchantmentUtil.getLevel(Longshot.SLING, stack)
                     );
                     double velY =
                         Math.signum(maxVelY) *
@@ -120,7 +126,10 @@ public class LongshotItem extends Item {
     }
 
     public static float getPullProgress(int useTicks) {
-        return (float) Math.min(useTicks, MAX_LOAD_TIME) / MAX_LOAD_TIME;
+        return (
+            (float) Math.min(useTicks, LongshotConfig.get().longshotLoadTime) /
+            LongshotConfig.get().longshotLoadTime
+        );
     }
 
     @Override
@@ -150,7 +159,7 @@ public class LongshotItem extends Item {
         return 1;
     }
 
-    public static Vec3d calcSlingVelocity(
+    private static Vec3d calcSlingVelocity(
         float pullProgress,
         float yaw,
         float pitch,
@@ -161,7 +170,14 @@ public class LongshotItem extends Item {
             (
                 1.0F +
                 1.15F *
-                (slingLevel / (float) Longshot.SLING.getMaxLevel())
+                // Avoid dividing by 0
+                (
+                    slingLevel /
+                    (float) Math.min(
+                        1,
+                        EnchantmentUtil.getMaxLevel(Longshot.SLING)
+                    )
+                )
             );
 
         return new Vec3d(
