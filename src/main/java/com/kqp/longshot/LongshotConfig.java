@@ -16,7 +16,7 @@ public class LongshotConfig implements ConfigData {
         "How far launching is without Sling. Full calculation:\n" +
         "pullDuration * (longshotBaseSpeed + (slingSpeedMultiplier * (slingLevel / slingMaxLevel)))"
     )
-    public double longshotBaseSpeed = 0.85D;
+    public double longshotBaseSpeed = 0.90D;
 
     public int longshotLoadTime = 10;
 
@@ -34,7 +34,7 @@ public class LongshotConfig implements ConfigData {
         "The launch bonus from Sling is calculated as:\n" +
         "pullDuration * (longshotBaseSpeed + (slingSpeedMultiplier * (slingLevel / slingMaxLevel)))"
     )
-    public double slingSpeedMultiplier = 0.95D;
+    public double slingSpeedMultiplier = 0.35D;
 
     public int slingMaxLevel = 5;
 
