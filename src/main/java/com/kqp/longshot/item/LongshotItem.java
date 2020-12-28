@@ -173,7 +173,7 @@ public class LongshotItem extends Item {
                 // Avoid dividing by 0
                 (
                     slingLevel /
-                    (double) Math.min(
+                    (double) Math.max(
                         1,
                         EnchantmentUtil.getMaxLevel(Longshot.SLING)
                     )
