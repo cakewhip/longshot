@@ -165,20 +165,21 @@ public class LongshotItem extends Item {
         float pitch,
         int slingLevel
     ) {
-        float speed =
-            (pullProgress * 3.0F) *
+        float speed = (float) (
+            (pullProgress * 3.0D) *
             (
-                LongshotConfig.get().longshotDurability +
-                LongshotConfig.get().slingMaxLevel *
+                LongshotConfig.get().longshotBaseSpeed +
+                LongshotConfig.get().slingSpeedMultiplier *
                 // Avoid dividing by 0
                 (
                     slingLevel /
-                    (float) Math.min(
+                    (double) Math.min(
                         1,
                         EnchantmentUtil.getMaxLevel(Longshot.SLING)
                     )
                 )
-            );
+            )
+        );
 
         return new Vec3d(
             -MathHelper.sin(yaw * 0.017453292F) *

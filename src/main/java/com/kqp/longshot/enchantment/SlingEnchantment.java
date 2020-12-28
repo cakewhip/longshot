@@ -29,12 +29,12 @@ public class SlingEnchantment extends TargetedEnchantment {
 
     @Override
     public boolean isTreasure() {
-        return LongshotConfig.get().slingEnchantmentIsTreasure;
+        return LongshotConfig.get().slingIsTreasure;
     }
 
     @Override
     public int getMaxLevel() {
-        return LongshotConfig.get().slingEnchantmentMaxLevel;
+        return LongshotConfig.get().slingMaxLevel;
     }
 
     @Override

@@ -16,7 +16,7 @@ public class LongshotConfig implements ConfigData {
         "How far launching is without Sling. Full calculation:\n" +
         "pullDuration * (longshotBaseSpeed + (slingSpeedMultiplier * (slingLevel / slingMaxLevel)))"
     )
-    public double longshotBaseSpeed = 1.0D;
+    public double longshotBaseSpeed = 0.85D;
 
     public int longshotLoadTime = 10;
 
@@ -25,7 +25,7 @@ public class LongshotConfig implements ConfigData {
         "This prevents players from launching themselves several blocks into the air.\n" +
         "Set to 90 for a fun time."
     )
-    public double longshotMaxPitchAngle = 25;
+    public double longshotMaxPitchAngle = 35;
 
     @Comment("Requires a restart.")
     public boolean enableSlingEnchantment = true;
@@ -34,7 +34,7 @@ public class LongshotConfig implements ConfigData {
         "The launch bonus from Sling is calculated as:\n" +
         "pullDuration * (longshotBaseSpeed + (slingSpeedMultiplier * (slingLevel / slingMaxLevel)))"
     )
-    public double slingSpeedMultiplier = 1.15D;
+    public double slingSpeedMultiplier = 0.95D;
 
     public int slingMaxLevel = 5;
 

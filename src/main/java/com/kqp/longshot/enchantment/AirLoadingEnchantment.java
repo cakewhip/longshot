@@ -29,7 +29,7 @@ public class AirLoadingEnchantment extends TargetedEnchantment {
 
     @Override
     public boolean isTreasure() {
-        return LongshotConfig.get().airLoadingEnchantmentIsTreasure;
+        return LongshotConfig.get().airLoadingIsTreasure;
     }
 
     @Override
